@@ -17,7 +17,8 @@ client = discord.Client() # object
 @tasks.loop(seconds=3600)
 async def name_change():
     print("Task is looping")
-    weekday = datetime.datetime.now()
+    weekday = datetime.datetime.now(tz=pytz.utc)
+    weekday = weekday.astimezone(timezone('US/Pacific'))
     #if its Tues at 7pm or thursday at 7pm
     if ( weekday.strftime("%a") == "Tue" and weekday.strftime("%-H") == "19") or (weekday.strftime("%a") == "Thu" and weekday.strftime("%-H") == "19"):
       channel = client.get_channel(802297661091872780)
