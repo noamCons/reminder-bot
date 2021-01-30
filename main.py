@@ -57,7 +57,8 @@ async def on_ready():
   print("Emojis:",client.emojis)
   print("guild:",client.guilds)
   channel = client.get_channel(802297661091872780)
-  weekday = datetime.datetime.now()
+  weekday = datetime.datetime.now(tz=pytz.utc)
+  weekday = weekday.astimezone(timezone('US/Pacific'))
   await channel.send("howdy! :french_bread: \nIt's {}".format(weekday.strftime("%a")))
   name_change.start()
 
