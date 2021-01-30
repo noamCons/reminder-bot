@@ -1,5 +1,4 @@
 discord
-threading
 discord.ext
 datetime
 asyncio
