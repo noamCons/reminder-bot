@@ -9,10 +9,6 @@ import pytz
 
 token = os.environ.get('BOT_TOKEN')
 
-
-from asyncio import sleep
-
-
 #parameters are thing that goes into a function
 client = discord.Client() # object 
 
