@@ -4,6 +4,9 @@ import datetime
 from discord.ext import commands, tasks
 import asyncio
 import os
+from pytz import timezone
+import pytz
+
 token = os.environ.get('BOT_TOKEN')
 
 
