@@ -1,0 +1,6 @@
+discord == 1.6.0
+threading
+discord.ext
+datetime
+asyncio
+os
