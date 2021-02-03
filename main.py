@@ -45,7 +45,7 @@ async def name_change():
           await channel.send('NO REPLY')
 
 @client.event
-async def on_message():
+async def on_message(msg):
   channel = client.get_channel(802297661091872780)
   await channel.send("Received a msg!")
 
