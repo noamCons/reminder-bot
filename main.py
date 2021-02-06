@@ -29,7 +29,7 @@ async def name_change():
 
       #wait reply, you'll have one day of time to reply 
       try:
-        msg = await client.wait_for('message', check=check, timeout = 86400)
+        msg = await client.wait_for('message', check=check, timeout = 90000)
         print("Here the msg we have:", msg)
       except asyncio.exceptions.TimeoutError:
         await channel.send("Reply timed out!")
@@ -37,19 +37,50 @@ async def name_change():
       #if the user replied
       try:
         if msg:
-          if msg.content == "Y":
+          verifiers = ["y","ye","yes","yess","sure","k","ok","ayy the bot works","nice"]
+          
+          if msg.content.lower() in verifiers:
             await channel.send('THE LESSON IS ON!')
           else:
-            await channel.send("Rescheduling :-|")
+            #try and see if there are errors
+            try: 
+
+              jackyid = "<@139270518153936896>"
+              jacky_user =client.get_user(139270518153936896)
+
+              weekday = datetime.datetime.now(tz=pytz.utc)
+              weekday = weekday.astimezone(timezone('US/Pacific'))
+              day = weekday.strftime("%a")
+              if jacky_user.dm_channel:
+                await jacky_user.dm_channel.send(f"{jackyid} Noam would like to reschedule lesson on {day}")
+              else:
+                dm_channel = jacky_user.create_dm()
+                await dm_channel.send(f"{jackyid} Noam would like to reschedule lesson on {day}")
+
+            except Exception as e:
+              await channel.send(f'ERROR!{e}')
+            else:
+              await channel.send(f'DONE!')
+
       except:
           await channel.send('NO REPLY')
+
 
 @client.event
 async def on_message(message):
   if message.author != client.user:
-    channel = client.get_channel(802297661091872780)
-    await channel.send("Received a msg!")
-
+    
+    #split msg into parts
+    try :
+      symbol = message.content.split()[0] # seperate string into a list by spaces
+      command = message.content.split()[1] 
+    except:
+      pass
+      
+    else:
+      if symbol == "!": 
+        if command == "status":
+          await message.channel.send("I'm alive!")
 
 
 @client.event
